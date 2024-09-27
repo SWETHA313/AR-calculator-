@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Calculator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.2.0/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ar.js/2.2.2/aframe-ar.min.js"></script>
+    <style>
+        .buttons {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60%;
+            height: 10s%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .button {
+            width: 20%;
+            height:50%;
+            margin: 1%;
+            font-size: 10px;
+            background: rgb(223, 171, 171);
+            border: 5px;
+            border-radius: 0;
+Show quoted text
+        <button class="button" onclick="clearDisplay()">C</button>
+        <button class="button" onclick="calculate()">=</button>
+        <button class="button" onclick="updateDisplay('/')">/</button>
+        <button class="button" onclick="deleteLast()">del</button>
+        <button class="button" onclick="updateDisplay('.')">.</button>
+        <button class="button" onclick="updateDisplay('%')">%</button>
+     
+    </div>
+
+    <script>
+        let display = '0';
+
+        function updateDisplay(value) {
+            if (display === '0' && value !== '.') {
+                display = value;
+            } else {
+                display += value;
+            }
+            document.querySelector('#result').setAttribute('text', `value: ${display}; color: white; align: center; width: 2;`);
+        }
+
+        function calculate() {
+            try {
+                display = eval(display).toString();
+            } catch (e) {
+                display = 'Error';
+            }
+            document.querySelector('#result').setAttribute('text', `value: ${display}; color: white; align: center; width: 2;`);
+        }
+        function clearDisplay(){
+            display='0';
+            document.querySelector('#result').setAttribute("text",`value: ${display};color:white;align:center;width:2;`)
+
+        }
+        function deleteLast(){
+            if (display.length>1){
+                display=display.slice(0,-1);
+            }
+            else{
+                display="0";
+            }
+            document.querySelector("#result").setAttribute("text",`value:${display};color:white;align:center;width:2;`)
+        }
+    </script>
+</body>
+</html>
